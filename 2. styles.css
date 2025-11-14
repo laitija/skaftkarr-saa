@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #0b1221, #1c2a4a);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+h1 {
+  margin-bottom: 10px;
+}
+canvas {
+  max-width: 600px;
+  margin: 20px auto;
+}
