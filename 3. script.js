@@ -1,17 +1,18 @@
 const LAT = 60.3923;  // Skaftkärr
 const LON = 25.6653;
 
+// Open-Meteo API
 const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m&hourly=temperature_2m&timezone=auto`;
 
 async function loadWeather() {
   const res = await fetch(url);
   const data = await res.json();
 
-  // Näytä nykyinen lämpötila
+  // Nykyinen lämpötila
   document.getElementById("current").textContent =
     `Nyt: ${data.current.temperature_2m} °C`;
 
-  // Piirrä lämpötilakäyrä
+  // Tuntiennuste
   const ctx = document.getElementById("tempChart").getContext("2d");
   new Chart(ctx, {
     type: "line",
@@ -29,4 +30,12 @@ async function loadWeather() {
   });
 }
 
-loadWeather();
+// Leaflet + RainViewer radar
+function initMap() {
+  const map = L.map('map').setView([LAT, LON], 9);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  // RainViewer radar tiles
+  L
